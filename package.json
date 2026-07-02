@@ -1,5 +1,5 @@
 {
-  "name": "ccc-stego",
+  "name": "@chenmeng1365/ccc",
   "version": "0.1.0",
   "description": "Unicode steganography encoder/decoder for text watermarking and fingerprinting",
   "main": "dist/ccc.cjs.js",
@@ -21,7 +21,7 @@
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
-    "clean": "rm -rf dist/",
+    "clean": "npx rimraf dist/",
     "prepublishOnly": "npm run clean && npm run build",
     "test": "node --test spec/js/*.test.js"
   },
@@ -38,7 +38,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourname/ccc.git"
+    "url": "git+https://github.com/yourname/ccc.git"
   },
   "bugs": {
     "url": "https://github.com/yourname/ccc/issues"
