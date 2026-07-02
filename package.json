@@ -1,0 +1,55 @@
+{
+  "name": "ccc-stego",
+  "version": "0.1.0",
+  "description": "Unicode steganography encoder/decoder for text watermarking and fingerprinting",
+  "main": "dist/ccc.cjs.js",
+  "module": "dist/ccc.esm.js",
+  "browser": "dist/ccc.umd.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/ccc.esm.js",
+      "require": "./dist/ccc.cjs.js",
+      "browser": "./dist/ccc.umd.js"
+    }
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "clean": "rm -rf dist/",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "node --test spec/js/*.test.js"
+  },
+  "keywords": [
+    "steganography",
+    "unicode",
+    "homoglyph",
+    "watermark",
+    "fingerprint",
+    "covert-channel",
+    "stego"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourname/ccc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourname/ccc/issues"
+  },
+  "homepage": "https://github.com/yourname/ccc#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "rollup": "^4.0.0"
+  }
+}

@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-ruby:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: ["3.0", "3.2", "3.3"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Run RSpec
+        run: bundle exec rspec spec/ruby/
+      - name: Run RuboCop
+        run: bundle exec rubocop lib/ || true
+
+  test-js:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ["18", "20", "22"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+      - name: Build bundles
+        run: npm run build
+
+  demo-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Ruby demos
+        run: |
+          ruby examples/ruby/stego_encoder_demo.rb
+          ruby examples/ruby/unicode_stego_demo.rb
+      - name: JS demos
+        run: |
+          node examples/js/stego_encoder_demo.js
+          node examples/js/unicode_stego_demo.js
